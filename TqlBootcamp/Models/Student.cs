@@ -21,10 +21,12 @@ namespace TqlBootcamp.Models
         public decimal TargetSalary { get; set; }
 
         public bool? InBootcamp { get; set; } // boolean that allows a null
-
-
+// brings us a list of assessment scores when calling a student profile 
+        public virtual List<AssessmentScore> AssessmentScores { get; set; }
         public Student() { } // default constructer
 
 
+
+       
     }
 }

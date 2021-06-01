@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TqlBootcamp.Models;
 
 namespace TqlBootcamp.Migrations
 {
     [DbContext(typeof(BootcampContext))]
-    partial class BootcampContextModelSnapshot : ModelSnapshot
+    [Migration("20210601175043_added Assessment class")]
+    partial class addedAssessmentclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,31 +44,6 @@ namespace TqlBootcamp.Migrations
                     b.ToTable("Assessments");
                 });
 
-            modelBuilder.Entity("TqlBootcamp.Models.AssessmentScore", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AssessmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AssessmentId");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("AssessmentScores");
-                });
-
             modelBuilder.Entity("TqlBootcamp.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -93,35 +70,6 @@ namespace TqlBootcamp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("TqlBootcamp.Models.AssessmentScore", b =>
-                {
-                    b.HasOne("TqlBootcamp.Models.Assessment", "Assessment")
-                        .WithMany("AssessmentScores")
-                        .HasForeignKey("AssessmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TqlBootcamp.Models.Student", "Student")
-                        .WithMany("AssessmentScores")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Assessment");
-
-                    b.Navigation("Student");
-                });
-
-            modelBuilder.Entity("TqlBootcamp.Models.Assessment", b =>
-                {
-                    b.Navigation("AssessmentScores");
-                });
-
-            modelBuilder.Entity("TqlBootcamp.Models.Student", b =>
-                {
-                    b.Navigation("AssessmentScores");
                 });
 #pragma warning restore 612, 618
         }

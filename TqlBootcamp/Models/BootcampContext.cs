@@ -9,9 +9,13 @@ namespace TqlBootcamp.Models
     public class BootcampContext : DbContext 
     {
 // property for table in db 
-        public DbSet<Student> Students { get; set; } // 
 
- // going to set up sql server connection 
+        public DbSet<Student> Students { get; set; } // property for Students class
+        public DbSet<Assessment> Assessments { get; set; } // property for Assessment class
+        public DbSet<AssessmentScore> AssessmentScores{ get; set; }
+
+
+        // going to set up sql server connection 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             if (!builder.IsConfigured)
